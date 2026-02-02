@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+require_once("./Autoload.php");
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="./main.js"></script>
-    <title>Document</title>
-</head>
+$userSession = new Session();
+define("USER_ID", $userSession->val());
 
-<body>
-    bonjour
 
-</body>
 
-</html>
+
+
+$router = new Router();
+$router->routeRequest();

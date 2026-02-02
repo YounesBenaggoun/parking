@@ -1,0 +1,13 @@
+<?php
+
+
+class HomeController
+{
+    public function index()
+    {
+
+
+
+        require_once("./views/annonces/index.view.php");
+    }
+}
