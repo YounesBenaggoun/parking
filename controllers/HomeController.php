@@ -8,6 +8,6 @@ class HomeController
 
 
 
-        require_once("./views/annonces/index.view.php");
+        require_once("./views/home/index.view.php");
     }
 }

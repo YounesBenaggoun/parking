@@ -1,3 +1,10 @@
+<?php
+if (isset($hideHeader) && $hideHeader)
+{
+    return false;
+}
+?>
+
 <header id="head">
     <div class="container">
         <div class="row">

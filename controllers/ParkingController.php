@@ -5,6 +5,7 @@ class ParkingController
 {
     public function index()
     {
+        $this->list();
     }
     public function add()
     {
@@ -18,10 +19,11 @@ class ParkingController
         {
             $parking = new Parking();
             $parking->id_owner = USER_ID;
+            $parking->name = $_POST['name'];
             $parking->lat = $_POST['lat'];
             $parking->lng = $_POST['lng'];
             $parking->adress = $_POST['adress'];
-            $parking->places = $_POST['places'];
+            $parking->spot = $_POST['spot'];
             $parking->save();
 
             header("Location: " . ROOT . "/parking");
@@ -29,7 +31,8 @@ class ParkingController
     }
     public function list()
     {
-        $list = Parking::findAll();
+        $user = new User(USER_ID);
+        $list = $user->getParkings();
 
 
         require_once("./views/parking/list.view.php");

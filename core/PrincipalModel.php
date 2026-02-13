@@ -80,7 +80,8 @@ class PrincipalModel
     }
     public static function findAll()
     {
-        $req = "SELECT * FROM  " . static::$table . "  ;";
+
+        $req = "SELECT * FROM  " . static::$table . "  ";
         $tab = Database::findBySql($req);
         return $tab;
     }

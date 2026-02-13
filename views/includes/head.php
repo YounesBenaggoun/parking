@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="<?= ROOT ?>/public/css/bootstrap-theme.css" media="screen">
     <link rel="stylesheet" href="<?= ROOT ?>/public/css/main.css">
 
+    <script src="<?= ROOT ?>/public/js/main.js" defer></script>
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
 	<script src="<?= ROOT ?>/public/js/html5shiv.js"></script>

@@ -4,6 +4,7 @@ RewriteEngine on
 RewriteCond %{REQUEST_URI} !^(.*).css$
 RewriteCond %{REQUEST_URI} !^(.*).png$
 RewriteCond %{REQUEST_URI} !^(.*).jpeg$
+RewriteCond %{REQUEST_URI} !^(.*).js$
 #RewriteCond %{REQUEST_URI} !^/agency/public/css/style.css$
 
 RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]

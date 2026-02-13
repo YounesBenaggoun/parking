@@ -44,7 +44,7 @@ ob_start();
                             <td><?= $park->adress ?></td>
                             <td><?= $park->lat ?></td>
                             <td><?= $park->lng ?></td>
-                            <td><?= $park->places ?></td>
+                            <td><?= $park->spot ?></td>
                         </tr>
                     <?Php } ?>
 

@@ -1,3 +1,9 @@
+<?php
+if (isset($hideFooter) && $hideFooter)
+{
+    return false;
+}
+?>
 <footer id="footer" class="top-space">
 
     <div class="footer1">
@@ -68,4 +74,3 @@
     </div>
 
 </footer>
-

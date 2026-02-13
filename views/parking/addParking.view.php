@@ -35,6 +35,10 @@ ob_start();
 
                         <form method="post" action="<?= ROOT ?>/parking/addParking">
                             <div class="top-margin">
+                                <label>Nom (Alias)</label>
+                                <input type="text" name="name" class="form-control">
+                            </div>
+                            <div class="top-margin">
                                 <label>Adresse</label>
                                 <input type="text" name="adress" class="form-control">
                             </div>
@@ -49,8 +53,8 @@ ob_start();
                                 </div>
                             </div>
                             <div class="top-margin">
-                                <label>Nombre de Places</label>
-                                <input type="text" name="places" class="form-control">
+                                <label>Nombre de Spots</label>
+                                <input type="number" name="spot" class="form-control">
                             </div>
 
 

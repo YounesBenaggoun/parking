@@ -39,4 +39,12 @@ class User extends PrincipalModel
         $user->password = trim($password);
         $user->save();
     }
+    public function getParkings()
+    {
+        $sql = "SELECT * FROM parking WHERE id_owner = :id;";
+        $list = Database::findBySql($sql, [
+            "id" => $this->id
+        ]);
+        return $list;
+    }
 }
