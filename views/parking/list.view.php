@@ -15,7 +15,7 @@ ob_start();
 
     <ol class="breadcrumb">
         <li><a href="index.html">Home</a></li>
-        <li class="active">Registration</li>
+        <li class="active"><a href="<?= ROOT ?>/parking/add">+ Ajouter un Parking</a></li>
     </ol>
 
     <div class="row">
@@ -23,7 +23,7 @@ ob_start();
         <!-- Article main content -->
         <article class="col-xs-12 maincontent">
             <header class="page-header">
-                <h1 class="page-title">Ajouter un Parking</h1>
+                <h1 class="page-title">Liste des Parking</h1>
             </header>
             <table class="table table-striped">
                 <thead>
@@ -32,7 +32,7 @@ ob_start();
                         <th>Adresse</th>
                         <th>Occupation</th>
                         <th>Revenue</th>
-                        <th>Type</th>
+                        <th>Spots</th>
 
                     </tr>
                 </thead>
@@ -45,6 +45,8 @@ ob_start();
                             <td><?= $park->lat ?></td>
                             <td><?= $park->lng ?></td>
                             <td><?= $park->spot ?></td>
+                            <td><a href="<?= ROOT ?>/parking/update/<?= $park->id ?>">Modifier</a></td>
+                            <td><a href="<?= ROOT ?>/parking/remove/<?= $park->id ?>">Supprimer</a></td>
                         </tr>
                     <?Php } ?>
 

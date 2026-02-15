@@ -6,7 +6,8 @@ define("USER_ID", $userSession->val());
 
 
 
-
-
 $router = new Router();
 $router->routeRequest();
+
+
+

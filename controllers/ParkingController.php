@@ -29,6 +29,47 @@ class ParkingController
             header("Location: " . ROOT . "/parking");
         }
     }
+    public function updateParking()
+    {
+        if (isset($_POST['adress']))
+        {
+
+            $parking = new Parking($_POST['id']);
+            $parking->id_owner = USER_ID;
+            $parking->name = $_POST['name'];
+            $parking->lat = $_POST['lat'];
+            $parking->lng = $_POST['lng'];
+            $parking->adress = $_POST['adress'];
+            $parking->spot = $_POST['spot'];
+            $parking->save();
+
+            header("Location: " . ROOT . "/parking/update/" . $parking->id);
+        }
+    }
+    public function remove($idParking)
+    {
+        $user = new User(USER_ID);
+        $user->removeParking($idParking);
+        header("Location: " . ROOT . "/parking/list/");
+    }
+    public function update($idParking)
+    {
+        $user = new User(USER_ID);
+        if (!$user->hasParking($idParking))
+        {
+            die("ERROR");
+        }
+        $parking = new Parking($idParking);
+
+
+
+
+
+
+
+
+        require_once("./views/parking/updateParking.view.php");
+    }
     public function list()
     {
         $user = new User(USER_ID);

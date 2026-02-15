@@ -23,7 +23,7 @@ ob_start();
         <!-- Article main content -->
         <article class="col-xs-12 maincontent">
             <header class="page-header">
-                <h1 class="page-title">Ajouter un Parking</h1>
+                <h1 class="page-title">Modifier le Parking</h1>
             </header>
 
             <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
@@ -33,28 +33,30 @@ ob_start();
 
 
 
-                        <form method="post" action="<?= ROOT ?>/parking/addParking">
+                        <form method="post" action="<?= ROOT ?>/parking/updateParking">
+                            <input type="hidden" name="id" value=" <?= $parking->id ?>" />
+
                             <div class="top-margin">
                                 <label>Nom (Alias)</label>
-                                <input type="text" name="name" class="form-control">
+                                <input type="text" value="<?= $parking->name ?>" name="name" class="form-control">
                             </div>
                             <div class="top-margin">
                                 <label>Adresse</label>
-                                <input type="text" name="adress" class="form-control">
+                                <input type="text" value="<?= $parking->adress ?>" name="adress" class="form-control">
                             </div>
                             <div class="row top-margin">
                                 <div class="col-sm-6">
                                     <label>Latitude <span class="text-danger">*</span></label>
-                                    <input type="text" name="lat" class="form-control">
+                                    <input value="<?= $parking->lat ?>" type="text" name="lat" class="form-control">
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Longitude <span class="text-danger">*</span></label>
-                                    <input type="text" name="lng" class="form-control">
+                                    <input type="text" value="<?= $parking->lng ?>" name="lng" class="form-control">
                                 </div>
                             </div>
                             <div class="top-margin">
                                 <label>Nombre de Spots</label>
-                                <input type="number" name="spot" class="form-control">
+                                <input value="<?= $parking->spot ?>" type="number" name="spot" class="form-control">
                             </div>
 
 
@@ -70,7 +72,7 @@ ob_start();
                                     </label>
                                 </div> -->
                                 <div class="col-lg-4 text-right">
-                                    <button class="btn btn-action" type="submit">Register</button>
+                                    <button class="btn btn-action" type="submit">Enregister</button>
                                 </div>
                             </div>
                         </form>

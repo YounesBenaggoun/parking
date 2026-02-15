@@ -47,4 +47,27 @@ class User extends PrincipalModel
         ]);
         return $list;
     }
+    public function getName()
+    {
+        return ucfirst($this->lastname) . " " . ucfirst($this->firstname);
+    }
+    public function hasParking($idParking)
+    {
+        $parking = new Parking($idParking);
+        if ($parking->id_owner == $this->id)
+        {
+            return true;
+        }
+        return false;
+    }
+    public function removeParking($idParking)
+    {
+        $parking = new Parking($idParking);
+        if ($parking->id_owner == $this->id)
+        {
+            $parking->remove();
+            return true;
+        }
+        return false;
+    }
 }
