@@ -1,11 +1,11 @@
 <?php
 
 
-
 #[\AllowDynamicProperties]
 class PrincipalModel
 {
     protected static $table;
+    public $id;
 
     public function __construct($id = 0)
     {
@@ -66,6 +66,10 @@ class PrincipalModel
         if (!$this->id)
             return false;
         $res = Database::findById(static::$table, $this->id);
+        if (!$res)
+        {
+            return false;
+        }
         foreach ($res as $key => $value)
         {
             $this->$key = $value;
@@ -85,4 +89,5 @@ class PrincipalModel
         $tab = Database::findBySql($req);
         return $tab;
     }
+
 }
