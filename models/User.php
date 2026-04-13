@@ -13,7 +13,7 @@ class User extends PrincipalModel
         $sql = "SELECT id,lastname,firstname,email FROM " . static::$table . " WHERE email = :email AND password = :password";
         $data = [
             "email" => trim($email),
-            "password" => trim($password)
+            "password" => md5(md5(trim($password)))
         ];
         $res = Database::findBySql($sql, $data);
         if (count($res))
@@ -34,7 +34,7 @@ class User extends PrincipalModel
         $user->firstname = trim($firstname);
         $user->lastname = trim($lastname);
         $user->email = trim($email);
-        $user->password = trim($password);
+        $user->password = md5(md5(trim($password)));
         $user->save();
 
         header("Location: " . ROOT . "/user");
