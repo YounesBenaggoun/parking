@@ -92,12 +92,8 @@ class PrincipalModel
         $tab = Database::findBySql($req);
         return $tab;
     }
-<<<<<<< HEAD
     public static function findByAttribute($attribute, $val)
     {
         return Database::findByAttribute(static::$table, $attribute, $val);
     }
-=======
-
->>>>>>> 2f6ffc89cc87360ebc7688728b1f6e5d19f8162b
 }
