@@ -61,13 +61,6 @@ class ParkingController
         }
         $parking = new Parking($idParking);
 
-
-
-
-
-
-
-
         require_once("./views/parking/updateParking.view.php");
     }
     public function list()

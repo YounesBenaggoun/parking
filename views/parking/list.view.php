@@ -3,8 +3,6 @@
 $pageTitle = "Sign IN";
 $hideHeader = true;
 
-
-
 ob_start();
 
 ?>
