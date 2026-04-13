@@ -50,11 +50,11 @@ ob_start();
                             <div class="row top-margin">
                                 <div class="col-sm-6">
                                     <label>Password <span class="text-danger">*</span></label>
-                                    <input type="text" name="password" class="form-control">
+                                    <input type="password" name="password" class="form-control">
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Confirm Password <span class="text-danger">*</span></label>
-                                    <input type="text" name="password2" class="form-control">
+                                    <input type="password" name="password2" class="form-control">
                                 </div>
                             </div>
 

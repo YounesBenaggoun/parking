@@ -27,8 +27,8 @@ class User extends PrincipalModel
         if (!$password || $password != $password2)
             return "PASSWORD DON'T MATCH OR EMPTY";
         $doubled = User::findByAttribute("email", $email);
-        echo $email;
-        if (count($doubled))
+
+        if ($doubled)
             return "EMAIL ALREADY EXIST";
         $user = new User();
         $user->firstname = trim($firstname);
@@ -36,6 +36,8 @@ class User extends PrincipalModel
         $user->email = trim($email);
         $user->password = trim($password);
         $user->save();
+
+        header("Location: " . ROOT . "/user");
     }
     public function getParkings()
     {
