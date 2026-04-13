@@ -1,16 +1,13 @@
 <?php
 
 
-
 class User extends PrincipalModel
 {
-
     protected static $table = "user";
     public function __construct($id = 0)
     {
         parent::__construct($id);
     }
-
     static function login($email, $password)
     {
         $sql = "SELECT id,lastname,firstname,email FROM " . static::$table . " WHERE email = :email AND password = :password";

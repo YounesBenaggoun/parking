@@ -37,21 +37,72 @@ class Database
         $req->execute();
         return $req;
     }
-    public static function findBySql($query, $data = [])
+    public static function insertQuery($query, $data = [])
     {
+        $pdo = self::getPDO();
+        try
+        {
+            $req = $pdo->prepare($query);
+            foreach ($data as $key => &$value)
+            {
+                $req->bindParam("$key", $value);
+            }
+            $req->execute();
+            return $pdo->lastInsertId();
+        }
+        catch (PDOException $error)
+        {
+            echo "myError: " .  $error->getMessage();
+            return false;
+        }
+    }
+    public static function countQuery($sql, $data = [])
+    {
+        $stm = self::query($sql, $data);
+        if ($stm)
+        {
+            $count = $stm->fetchColumn();
+        }
+        return $count;
+    }
+    public static function findBySql($query, $data = [], $outputArray = false)
+    {
+        if (!$data)
+        {
+            $data = [];
+        }
         $stm = self::query($query, $data);
-        return $stm->fetchAll(PDO::FETCH_OBJ);
+        if (!$stm)
+        {
+            return false;
+        }
+        if ($outputArray)
+        {
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
+        }
+        else
+        {
+            return $stm->fetchAll(PDO::FETCH_OBJ);
+        }
     }
     static function findById($table = "client", $id = 15)
     {
         $sql   = "SELECT * FROM `" . $table . "` WHERE `id`= :id LIMIT 1";
-        $res   = self::findBySql($sql, ["id" => $id]);
+        $res   = self::findBySql($sql, [":id" => $id]);
+        if (!$res)
+        {
+            return false;
+        }
         return array_shift($res);
     }
     static function findByAttribute($table = "client",  $attribute = "id", $val = 15)
     {
         $sql   = "SELECT * FROM `" . $table . "` WHERE `$attribute`= :$attribute ";
-        $res   = self::findBySql($sql, [$attribute => $val]);
-        return ($res);
+        $res   = self::findBySql($sql, [":" . $attribute => $val]);
+        if (!$res)
+        {
+            return false;
+        }
+        return $res;
     }
 }

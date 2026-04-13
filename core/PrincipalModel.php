@@ -6,6 +6,7 @@
 class PrincipalModel
 {
     protected static $table;
+    public $id;
 
     public function __construct($id = 0)
     {
@@ -40,7 +41,11 @@ class PrincipalModel
         $columns = implode(",", array_keys($data));
         $params = ":" . implode(",:", array_keys($data));
         $query = "INSERT INTO " . static::$table . " ($columns) VALUES ($params)";
-        return Database::query($query, $data);
+        $id = Database::insertQuery($query, $data);
+        if ($id)
+        {
+            $this->id = $id;
+        }
     }
     private function update()
     {
@@ -66,6 +71,10 @@ class PrincipalModel
         if (!$this->id)
             return false;
         $res = Database::findById(static::$table, $this->id);
+        if (!$res)
+        {
+            return false;
+        }
         foreach ($res as $key => $value)
         {
             $this->$key = $value;
@@ -76,13 +85,16 @@ class PrincipalModel
         if (!$this->id)
             return false;
         $req = "DELETE FROM " . static::$table . " WHERE  id =  :id ; ";
-        return Database::query($req, ["id" => $this->id]);
+        return Database::query($req, [":id" => $this->id]);
     }
     public static function findAll()
     {
-
-        $req = "SELECT * FROM  " . static::$table . "  ";
+        $req = "SELECT * FROM  " . static::$table . " ";
         $tab = Database::findBySql($req);
         return $tab;
+    }
+    public static function findByAttribute($attribute, $val)
+    {
+        return Database::findByAttribute(static::$table, $attribute, $val);
     }
 }
