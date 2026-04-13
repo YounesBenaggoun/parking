@@ -30,31 +30,31 @@ ob_start();
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3 class="thin text-center">Register a new account</h3>
-                        <p class="text-center text-muted">Lorem ipsum dolor sit amet, <a href="signin.html">Login</a> adipisicing elit. Quo nulla quibusdam cum doloremque incidunt nemo sunt a tenetur omnis odio. </p>
+                        <p class="text-center text-muted"></p>
                         <hr>
 
-                        <form>
+                        <form method="post" action="<?= ROOT ?>/user/createUser">
                             <div class="top-margin">
                                 <label>First Name</label>
-                                <input type="text" class="form-control">
+                                <input type="text" name="firstname" class="form-control">
                             </div>
                             <div class="top-margin">
                                 <label>Last Name</label>
-                                <input type="text" class="form-control">
+                                <input type="text" name="lastname" class="form-control">
                             </div>
                             <div class="top-margin">
                                 <label>Email Address <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control">
+                                <input type="text" name="email" class="form-control">
                             </div>
 
                             <div class="row top-margin">
                                 <div class="col-sm-6">
                                     <label>Password <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" name="password" class="form-control">
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Confirm Password <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" name="password2" class="form-control">
                                 </div>
                             </div>
 
@@ -62,10 +62,10 @@ ob_start();
 
                             <div class="row">
                                 <div class="col-lg-8">
-                                    <label class="checkbox">
+                                    <!-- <label class="checkbox">
                                         <input type="checkbox">
                                         I've read the <a href="page_terms.html">Terms and Conditions</a>
-                                    </label>
+                                    </label> -->
                                 </div>
                                 <div class="col-lg-4 text-right">
                                     <button class="btn btn-action" type="submit">Register</button>

@@ -29,10 +29,11 @@ class Database
     public static function query($query, $data = [])
     {
         $pdo = self::getPDO();
+        echo $query;
         $req = $pdo->prepare($query);
         foreach ($data as $key => &$value)
         {
-            $req->bindParam(":$key", $value);
+            $req->bindParam("$key", $value);
         }
         $req->execute();
         return $req;
@@ -97,8 +98,13 @@ class Database
     }
     static function findByAttribute($table = "client",  $attribute = "id", $val = 15)
     {
-        $sql   = "SELECT * FROM `" . $table . "` WHERE `$attribute`= :$attribute ";
-        $res   = self::findBySql($sql, [":" . $attribute => $val]);
+        $sql   = "SELECT * FROM `" . $table . "` WHERE `$attribute`= ':$attribute' ";
+        echo "<br/>";
+        echo $sql;
+        echo "<br/>";
+
+        // $res   = self::findBySql($sql, [":" . $attribute => $val]);
+        $res   = self::findBySql($sql, [":email"  => "user@gamil.com"]);
         if (!$res)
         {
             return false;

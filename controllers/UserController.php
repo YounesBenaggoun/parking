@@ -16,10 +16,6 @@ class UserController
         {
             header("Location: " . ROOT);
         }
-
-
-
-
         require_once("./views/users/signin.view.php");
     }
     public function login()
@@ -50,10 +46,23 @@ class UserController
     }
     public function signup()
     {
-
-        //$res = User::createUser("omar", "younes", "p.primme@gmail.com", "12341234", "12341234");
+        // $res = User::createUser("omar", "younes", "p.primme@gmail.com", "12341234", "12341234");
         require_once("./views/users/signup.view.php");
     }
+    public function createUser()
+    {
+        if (isset($_POST['firstname']))
+        {
+            $password = $_POST['password'];
+            $password2 = $_POST['password2'];
+            $firstname = $_POST['firstname'];
+            $lastname = $_POST['lastname'];
+            $email = $_POST['email'];
+            $res = User::createUser($firstname, $lastname, $email, $password, $password2);
+        }
+    }
+
+
     public function logOut()
     {
         $session = new Session();

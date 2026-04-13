@@ -26,7 +26,8 @@ class User extends PrincipalModel
     {
         if (!$password || $password != $password2)
             return "PASSWORD DON'T MATCH OR EMPTY";
-        $doubled = Database::findByAttribute(static::$table, "email", $email);
+        $doubled = User::findByAttribute("email", $email);
+        echo $email;
         if (count($doubled))
             return "EMAIL ALREADY EXIST";
         $user = new User();
