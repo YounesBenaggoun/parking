@@ -45,3 +45,21 @@ Frontend :  BootStrap / HTML-CSS-JS
 Backend :   / PHP
 Base de données :  MySql
 Cartographie : OpenStreetMap 
+
+
+
+# 🧱 Architecture
+
+Frontend (Web / Mobile)
+        ↓
+Backend (Gestion utilisateurs, réservations)
+        ↓
+Base de données
+
+# 📦 Installation
+
+```
+# Cloner le projet
+git clone https://github.com/YounesBenaggoun/parking.git
+
+```
