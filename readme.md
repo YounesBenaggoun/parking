@@ -24,21 +24,21 @@ Ce déséquilibre entre offre réelle et demande constitue une opportunité d’
 Le projet vise à développer une solution de parking partagé permettant :
 
 aux propriétaires (particuliers, entreprises, collectivités)
-👉 de proposer leurs places inutilisées à la location
+- 👉 de proposer leurs places inutilisées à la location
 aux utilisateurs
-👉 de trouver, réserver et payer une place facilement
-🚀 Fonctionnalités principales
-👤 Côté utilisateur
-🔍 Recherche de places disponibles en temps réel
-📍 Géolocalisation des parkings
-📅 Réservation à l’heure
-💳 Paiement sécurisé
-⭐ Système d’avis et de notation
-🏢 Côté propriétaire
-➕ Ajout de places de parking
-🕒 Gestion des disponibilités
-💰 Définition des tarifs
-📊 Suivi des réservations et revenus
+- 👉 de trouver, réserver et payer une place facilement
+- 🚀 Fonctionnalités principales
+- 👤 Côté utilisateur
+- 🔍 Recherche de places disponibles en temps réel
+- 📍 Géolocalisation des parkings
+- 📅 Réservation à l’heure
+- 💳 Paiement sécurisé
+- ⭐ Système d’avis et de notation
+- 🏢 Côté propriétaire
+- ➕ Ajout de places de parking
+- 🕒 Gestion des disponibilités
+- 💰 Définition des tarifs
+- 📊 Suivi des réservations et revenus
 
 # 🛠️ Technologies (à adapter selon ton projet)
 Frontend :  BootStrap / HTML-CSS-JS
