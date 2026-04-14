@@ -2,9 +2,6 @@
 class Session
 {
 
-	// static $index_pageLink = "index.php";
-	// static $login_pageLink = "login.php";
-
 	protected $name = "user_id";
 
 	function __construct($name = "user_id")
