@@ -42,7 +42,7 @@ ob_start();
                             </div>
                             <div class="top-margin">
                                 <label>Adresse</label>
-                                <input type="text" value="<?= $parking->adress ?>" name="adress" class="form-control">
+                                <input type="text" value="<?= $parking->address ?>" name="address" class="form-control">
                             </div>
                             <div class="row top-margin">
                                 <div class="col-sm-6">

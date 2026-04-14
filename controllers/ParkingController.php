@@ -16,14 +16,14 @@ class ParkingController
     }
     public function addParking()
     {
-        if (isset($_POST['adress']))
+        if (isset($_POST['address']))
         {
             $parking = new Parking();
             $parking->id_owner = USER_ID;
             $parking->name = $_POST['name'];
             $parking->lat = $_POST['lat'];
             $parking->lng = $_POST['lng'];
-            $parking->adress = $_POST['adress'];
+            $parking->address = $_POST['address'];
             $parking->spot = $_POST['spot'];
             $parking->save();
 
@@ -32,7 +32,7 @@ class ParkingController
     }
     public function updateParking()
     {
-        if (isset($_POST['adress']))
+        if (isset($_POST['address']))
         {
 
             $parking = new Parking($_POST['id']);
@@ -40,7 +40,7 @@ class ParkingController
             $parking->name = $_POST['name'];
             $parking->lat = $_POST['lat'];
             $parking->lng = $_POST['lng'];
-            $parking->adress = $_POST['adress'];
+            $parking->address = $_POST['address'];
             $parking->spot = $_POST['spot'];
             $parking->save();
 

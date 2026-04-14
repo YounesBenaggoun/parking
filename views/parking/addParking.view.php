@@ -39,8 +39,8 @@ ob_start();
                                 <input type="text" name="name" class="form-control">
                             </div>
                             <div class="top-margin">
-                                <label>Adresse</label>
-                                <input type="text" name="adress" class="form-control">
+                                <label>addresse</label>
+                                <input type="text" name="address" class="form-control">
                             </div>
                             <div class="row top-margin">
                                 <div class="col-sm-6">

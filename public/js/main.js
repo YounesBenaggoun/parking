@@ -2,17 +2,18 @@
 window.map;
 window.onload = function () {
 
-    window.map = L.map('map').setView([48.85913493741727, 2.3475296076799217], 11);
+    window.map = L.map('map').setView([48.85913493741727, 2.3475296076799217], 12);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 20,
+        maxZoom: 23,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(window.map);
 
     let parkings_list = JSON.parse(parkings);
+    console.log(parkings_list);
 
     parkings_list.forEach(element => {
-        new Marker(element.lat, element.lng);
+        new Marker(element.lat, element.lng, element.address, element.price);
 
     });
 
@@ -20,9 +21,23 @@ window.onload = function () {
 
 class Marker {
     obj;
-    constructor(lat, lng) {
+    constructor(lat, lng, address, price) {
+        this.address = address;
+        this.price = price;
         this.obj = L.marker([lat, lng]).addTo(window.map);
-        this.obj.bindPopup("<b>Rich content</b><br>More info here");
+
+        const contenuPopup = `
+                <div style="font-size:22px; font-weight:600; margin-bottom:6px">
+                    Mon lieu
+                </div>
+                <div style="font-size:16px; color:#555; margin-bottom:8px">
+                    addresse ou description
+                </div>
+                <div style="font-size:15px">
+                    Info complémentaire
+                </div>
+                `;
+        this.obj.bindPopup(this.getPopup());
         this.initEvent();
     }
     initEvent() {
@@ -34,6 +49,22 @@ class Marker {
         this.obj.on('mouseout', function (e) {
             this.closePopup();
         });
+
+    }
+    getPopup() {
+        const contenuPopup = `
+                <div style="font-size:16px; font-weight:600; margin-bottom:6px">
+                    ${this.price} €/15 minutes
+                </div>
+                <div style="font-size:16px; color:#555; margin-bottom:8px">
+                    addresse ou description
+                </div>
+                <div style="font-size:15px">
+                    ${this.address}
+                </div>
+                `;
+        return contenuPopup;
+
 
     }
 

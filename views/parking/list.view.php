@@ -39,7 +39,7 @@ ob_start();
                     { ?>
                         <tr>
                             <td><?= $park->name ?></td>
-                            <td><?= $park->adress ?></td>
+                            <td><?= $park->address ?></td>
                             <td><?= $park->lat ?></td>
                             <td><?= $park->lng ?></td>
                             <td><?= $park->spot ?></td>
