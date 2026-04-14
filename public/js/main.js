@@ -13,7 +13,7 @@ window.onload = function () {
     console.log(parkings_list);
 
     parkings_list.forEach(element => {
-        new Marker(element.lat, element.lng, element.address, element.price);
+        new Marker(element);
 
     });
 
@@ -21,10 +21,11 @@ window.onload = function () {
 
 class Marker {
     obj;
-    constructor(lat, lng, address, price) {
-        this.address = address;
-        this.price = price;
-        this.obj = L.marker([lat, lng]).addTo(window.map);
+    constructor(element) {
+        this.address = element.address;
+        this.price = element.price;
+        this.id_parking = element.id;
+        this.obj = L.marker([element.lat, element.lng]).addTo(window.map);
 
         const contenuPopup = `
                 <div style="font-size:22px; font-weight:600; margin-bottom:6px">
@@ -53,11 +54,9 @@ class Marker {
     }
     getPopup() {
         const contenuPopup = `
-                <div style="font-size:16px; font-weight:600; margin-bottom:6px">
-                    ${this.price} €/15 minutes
-                </div>
+                
                 <div style="font-size:16px; color:#555; margin-bottom:8px">
-                    addresse ou description
+                    ${this.price} €/15 minutes
                 </div>
                 <div style="font-size:15px">
                     ${this.address}
