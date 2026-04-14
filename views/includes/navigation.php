@@ -15,13 +15,12 @@ if (USER_ID)
         <div class="navbar-header">
             <!-- Button for smallest screens -->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-            <a class="navbar-brand" href="<?= ROOT ?>"><img src="<?= ROOT ?>/public/images/logo.png" alt="PARKING"></a>
+            <a class="navbar-brand" href="<?= ROOT ?>">PARKING</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav pull-right">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="<?= ROOT ?>">Home</a></li>
+                <li><a href="<?= ROOT ?>/contact">Contact</a></li>
 
                 <?php
                 if (USER_ID)

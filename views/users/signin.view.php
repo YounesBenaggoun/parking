@@ -26,11 +26,11 @@ ob_start();
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3 class="thin text-center">Sign in to your account</h3>
-                        <p class="text-center text-muted">Lorem ipsum dolor sit amet, <a href="signup.html">Register</a> adipisicing elit. Quo nulla quibusdam cum doloremque incidunt nemo sunt a tenetur omnis odio. </p>
+                        <p class="text-center text-muted">if you don't have an Account, <a href="<?= ROOT ?>/user/signup">Create a new Account</a> in Here</p>
                         <hr>
                         <form method="post" action="<?= ROOT ?>/user/login">
                             <div class="top-margin">
-                                <label>Username/Email <span class="text-danger">*</span></label>
+                                <label>Email <span class="text-danger">*</span></label>
                                 <input type="text" name="email" class="form-control">
                             </div>
                             <div class="top-margin">

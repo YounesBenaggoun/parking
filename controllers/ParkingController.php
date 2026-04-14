@@ -5,6 +5,7 @@ class ParkingController
 {
     public function index()
     {
+        // echo "bonjour parking";
         $this->list();
     }
     public function add()

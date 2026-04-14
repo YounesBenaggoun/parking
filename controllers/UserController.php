@@ -31,9 +31,6 @@ class UserController
             {
                 $userSession = new Session();
                 $userSession->val($userId);
-                //
-                var_dump($userSession);
-
                 header("Location: " . ROOT . "/user/signin");
             }
             else
@@ -41,12 +38,9 @@ class UserController
                 header("Location: " . ROOT . "/user/signin");
             }
         }
-
-        // $res = User::login($_POST[]);
     }
     public function signup()
     {
-        // $res = User::createUser("omar", "younes", "p.primme@gmail.com", "12341234", "12341234");
         require_once("./views/users/signup.view.php");
     }
     public function createUser()
