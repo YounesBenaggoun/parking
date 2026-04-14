@@ -3,8 +3,14 @@
 ob_start();
 
 ?>
+
+<script>
+    var parkings = '<?= $parkings_json ?>';
+</script>
 <link href="<?= ROOT ?>/public/leaflet/leaflet.css" rel="stylesheet" />
 <script src="<?= ROOT ?>/public/leaflet/leaflet.js" defer></script>
+
+
 
 
 <script>

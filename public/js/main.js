@@ -1,11 +1,26 @@
 
-
+window.map;
 window.onload = function () {
-    console.log("BEEEE");
-    var map = L.map('map').setView([51.505, -0.09], 13);
+
+    window.map = L.map('map').setView([48.85913493741727, 2.3475296076799217], 11);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
+        maxZoom: 20,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
+    }).addTo(window.map);
+
+    let parkings_list = JSON.parse(parkings);
+
+    parkings_list.forEach(element => {
+        new Marker(element.lat, element.lng);
+
+    });
+
+}
+
+class Marker {
+    constructor(lat, lng) {
+        this.obj = L.marker([lat, lng]).addTo(window.map);
+    }
+    
 }
