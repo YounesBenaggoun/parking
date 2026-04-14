@@ -41,20 +41,22 @@ aux utilisateurs
 - 📊 Suivi des réservations et revenus
 
 # 🛠️ Technologies (à adapter selon ton projet)
-Frontend :  BootStrap / HTML-CSS-JS
-Backend :   / PHP
-Base de données :  MySql
-Cartographie : OpenStreetMap 
+- Frontend :  BootStrap / HTML-CSS-JS
+- Backend :   / PHP
+- Base de données :  MySql
+- Cartographie : OpenStreetMap 
 
 
 
 # 🧱 Architecture
 
+```
 Frontend (Web / Mobile)
         ↓
 Backend (Gestion utilisateurs, réservations)
         ↓
 Base de données
+```
 
 # 📦 Installation
 
