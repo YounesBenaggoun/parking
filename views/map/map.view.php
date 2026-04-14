@@ -43,12 +43,12 @@ ob_start();
             </div>
             <div class="row top-margin">
                 <div class="col-sm-6">
-                    <label>Latitude <span class="text-danger">*</span></label>
-                    <input type="text" name="lat" class="form-control">
+                    <label>début <span class="text-danger">*</span></label>
+                    <input type="datetime-local" value="<?= date("H:i"); ?>" name="lat" class="form-control">
                 </div>
                 <div class="col-sm-6">
-                    <label>Longitude <span class="text-danger">*</span></label>
-                    <input type="text" name="lng" class="form-control">
+                    <label>fin : <span class="text-danger">*</span></label>
+                    <input type="time" min="08:00" max="20:00" step="900" name="lng" class="form-control">
                 </div>
             </div>
             <div class="top-margin">
