@@ -1,7 +1,11 @@
 <?php
 
+namespace Core;
+
 require("config.php");
 require("functions.php");
+
+
 
 
 class Router
@@ -40,7 +44,7 @@ class Router
         }
 
         $params = array_slice($urlParts, 2);
-        $reflectionMethod = new ReflectionMethod($controller, $action);
+        $reflectionMethod = new \ReflectionMethod($controller, $action);
         $methodParams = $reflectionMethod->getParameters();
 
         if (count($methodParams) <= 0)

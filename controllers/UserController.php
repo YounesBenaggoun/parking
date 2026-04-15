@@ -1,5 +1,8 @@
 <?php
 
+use Models\Session;
+use Models\User;
+
 
 class UserController
 {

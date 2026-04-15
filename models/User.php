@@ -1,6 +1,13 @@
 <?php
 
 
+
+namespace Models;
+
+
+use Core\PrincipalModel;
+use Core\Database;
+
 class User extends PrincipalModel
 {
     protected static $table = "user";
@@ -22,6 +29,9 @@ class User extends PrincipalModel
         }
         return false;
     }
+    
+    
+
     static function createUser($firstname,  $lastname,  $email,  $password,  $password2)
     {
         if (!$password || $password != $password2)

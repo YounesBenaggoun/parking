@@ -1,5 +1,19 @@
 {
+    "name": "younes/myphptest",
+    "authors": [
+        {
+            "name": "Younes",
+            "email": "younes.Benaggoun3@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Models\\": "Models",
+            "Core\\": "Core",
+            "Controllers\\": "Controllers"
+        }
+    },
     "require-dev": {
-        "phpunit/phpunit": "^12.5"
+        "phpunit/phpunit": "^9"
     }
 }

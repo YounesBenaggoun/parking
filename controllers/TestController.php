@@ -5,9 +5,10 @@ class TestController
 {
     public function index()
     {
-        $annonce = new Annonce(80);
-        $annonce->titre = "Maroc";
-        $annonce->save();
-        show($annonce);
+        // $annonce = new Annonce(80);
+        // $annonce->titre = "Maroc";
+        // $annonce->save();
+        // show($annonce);
+        echo "TestController";
     }
 }

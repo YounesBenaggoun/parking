@@ -4,6 +4,7 @@ class Autoload
 {
     public static function register()
     {
+
         spl_autoload_register([__CLASS__, 'load']);
     }
 
@@ -20,6 +21,7 @@ class Autoload
         foreach ($directories as $directory)
         {
             $file = $baseDir . $directory . $className . ".php";
+            $file = str_replace('\\', '/', $file);
             if (file_exists($file))
             {
                 include $file;
