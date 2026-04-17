@@ -70,7 +70,7 @@ class User extends PrincipalModel
     {
         $sql = "SELECT * FROM parking WHERE id_owner = :id;";
         $list = Database::findBySql($sql, [
-            "id" => $this->id
+            ":id" => $this->id
         ]);
         if (!$list || !sizeof($list))
         {

@@ -16,4 +16,16 @@ class Parking extends PrincipalModel
     {
         parent::__construct($id);
     }
+    public static function getParkings($id_owner)
+    {
+        $sql = "SELECT * FROM parking WHERE id_owner = :id;";
+        $list = Database::findBySql($sql, [
+            ":id" => $id_owner
+        ]);
+        if (!$list || !sizeof($list))
+        {
+            return [];
+        }
+        return $list;
+    }
 }
