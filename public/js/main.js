@@ -1,5 +1,6 @@
 
 window.map;
+
 window.onload = function () {
 
     window.map = L.map('map').setView([48.85913493741727, 2.3475296076799217], 12);
@@ -68,8 +69,30 @@ class Marker {
         this.obj.on('click', function (e) {
             // e.preventDefault();
             L.DomEvent.stopPropagation(e);
-            console.log('Marker clicked!', e);
-        });
+
+            document.querySelector("#id_parking").value = this.id_parking;
+            document.querySelector("#address").value = this.address;
+            document.querySelector("#price").value = this.price + " €/15 minutes";
+
+
+
+
+
+
+
+
+
+
+
+        }.bind(this));
+        // this.obj.on('mouseover', function (e) {
+        //     this.openPopup();
+        // });
+
+        // // Hide popup when mouse leaves
+        // this.obj.on('mouseout', function (e) {
+        //     this.closePopup();
+        // });
 
 
     }

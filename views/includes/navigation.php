@@ -23,6 +23,7 @@ if (USER_ID)
             <ul class="nav navbar-nav pull-right">
                 <li><a href="<?= ROOT ?>">Home</a></li>
                 <li><a href="<?= ROOT ?>/contact">Contact</a></li>
+                <li><a href="<?= ROOT ?>/Reservation/list">Mes Reservation</a></li>
 
                 <?php
                 if (USER_ID)

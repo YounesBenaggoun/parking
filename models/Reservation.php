@@ -35,4 +35,28 @@ class Reservation extends PrincipalModel
         $price = $parking->price * ($duration / 15);
         return $price;
     }
+    static function getReservation($id_user)
+    {
+        $sql = "SELECT * FROM reservation WHERE id_user = :id_user";
+        $records = Database::findBySql($sql, [
+            ":id_user" => $id_user
+        ]);
+        if (!$records || !sizeof($records))
+        {
+            return [];
+        }
+
+        foreach ($records as $record)
+        {
+            $parking = new Parking($record->id_parking);
+            // pri($parking);
+            $record->address = $parking->address;
+            $record->name = $parking->name;
+        }
+        if (!$records || !sizeof($records))
+        {
+            return [];
+        }
+        return $records;
+    }
 }

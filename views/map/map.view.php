@@ -32,28 +32,25 @@ ob_start();
     </div>
     <div class="col-md-3">
         <h3>Réserve Ton Parking</h3>
-        <form method="post" action="<?= ROOT ?>/parking/addParking">
-            <div class="top-margin">
-                <label>Nom (Alias)</label>
-                <input type="text" name="name" class="form-control">
-            </div>
+        <form method="post" action="<?= ROOT ?>/Reservation/addReservation">
+            <input type="hidden" value="" name="id_parking" id="id_parking" />
             <div class="top-margin">
                 <label>addresse</label>
-                <input type="text" name="address" class="form-control">
+                <input type="text" name="address" id="address" class="form-control">
+            </div>
+            <div class="top-margin">
+                <label>Prix </label>
+                <input type="text" disabled name="name" id="price" class="form-control">
             </div>
             <div class="row top-margin">
-                <div class="col-sm-6">
+                <div class="col-sm-11">
                     <label>Heure d'Arrivé <span class="text-danger">*</span></label>
-                    <input type="datetime-local" value="<?= date("H:i"); ?>" name="lat" class="form-control">
-                </div>
-                <div class="col-sm-6">
-                    <label>Durée (minutes) : <span class="text-danger">*</span></label>
-                    <input type="number" step="15" name="lng" class="form-control">
+                    <input type="datetime-local" value="" name="begin" class="form-control">
                 </div>
             </div>
             <div class="top-margin">
-                <label>Nombre de Spots</label>
-                <input type="number" name="spot" class="form-control">
+                <label>Duration (Minutes)</label>
+                <input type="number" name="duration" step="15" class="form-control">
             </div>
 
 
@@ -69,7 +66,7 @@ ob_start();
                                     </label>
                                 </div> -->
                 <div class="col-lg-4 text-right">
-                    <button class="btn btn-action" type="submit">Register</button>
+                    <button class="btn btn-action" type="submit">Reserver</button>
                 </div>
             </div>
         </form>

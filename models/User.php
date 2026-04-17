@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace Models;
 
 
+
 use Core\PrincipalModel;
 use Core\Database;
+use Models\Parking;
+
+
 
 class User extends PrincipalModel
 {
@@ -68,6 +72,10 @@ class User extends PrincipalModel
         $list = Database::findBySql($sql, [
             "id" => $this->id
         ]);
+        if (!$list || !sizeof($list))
+        {
+            return [];
+        }
         return $list;
     }
     public function getName()
@@ -96,9 +104,33 @@ class User extends PrincipalModel
     public function getReservation()
     {
         $sql = "SELECT * FROM reservation WHERE id_user = :id";
-        $record = Database::findBySql($sql, [
+        $records = Database::findBySql($sql, [
             ":id" => $this->id
         ]);
-        return $record;
+        if (!$records || !sizeof($records))
+        {
+            return [];
+        }
+
+        foreach ($records as $record)
+        {
+            $parking = new Parking($record->id_parking);
+            // pri($parking);
+            $record->address = $parking->address;
+            $record->name = $parking->name;
+        }
+        if (!$records || !sizeof($records))
+        {
+            return [];
+        }
+        return $records;
+    }
+    public function removeReservation(int $id_reservation): void
+    {
+        $sql = "DELETE FROM reservation WHERE id = :id_reservation AND id_user = :id_user ";
+        Database::query($sql, [
+            ":id_reservation" => $id_reservation,
+            ":id_user" => $this->id
+        ]);
     }
 }
