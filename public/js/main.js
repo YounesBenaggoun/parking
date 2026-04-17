@@ -26,6 +26,7 @@ class Marker {
         this.price = element.price;
         this.id_parking = element.id;
         this.obj = L.marker([element.lat, element.lng]).addTo(window.map);
+        this.initEvent();
 
         const contenuPopup = `
                 <div style="font-size:22px; font-weight:600; margin-bottom:6px">
@@ -54,7 +55,6 @@ class Marker {
     }
     getPopup() {
         const contenuPopup = `
-                
                 <div style="font-size:16px; color:#555; margin-bottom:8px">
                     ${this.price} €/15 minutes
                 </div>
@@ -63,9 +63,14 @@ class Marker {
                 </div>
                 `;
         return contenuPopup;
+    }
+    initEvent() {
+        this.obj.on('click', function (e) {
+            // e.preventDefault();
+            L.DomEvent.stopPropagation(e);
+            console.log('Marker clicked!', e);
+        });
 
 
     }
-
-
 }

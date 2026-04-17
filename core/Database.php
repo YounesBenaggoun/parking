@@ -1,114 +1,125 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Core;
 
-use \Exception;
-use \PDO;
-use \PDOException;
+use Exception;
+use PDO;
+use PDOException;
+use RuntimeException;
 
 class Database
 {
-    private static $instance;
-    private $connection;
+    private static ?self $instance = null;
+    private PDO $connection;
 
-    private function __construct($host, $username, $password, $database)
+    private function __construct(string $host, string $username, string $password, string $database)
     {
         try
         {
-            $this->connection = new PDO("mysql:host=$host;dbname=$database", $username, $password);
-            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->connection = new PDO(
+                "mysql:host=$host;dbname=$database;charset=utf8mb4",
+                $username,
+                $password,
+                [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+            );
         }
-        catch (Exception  $e)
+        catch (PDOException $e)
         {
-            die("Erreur de la connection à la base de données : " . $e->getMessage());
+            throw new RuntimeException(
+                'Erreur de connexion à la base de données : ' . $e->getMessage(),
+                (int) $e->getCode(),
+                $e
+            );
         }
     }
-    public static function getPDO()
+    public static function getPDO(): PDO
     {
         require_once("config.php");
         if (!self::$instance)
         {
+            require_once("config.php");
             self::$instance = new Database(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
         }
         return (self::$instance)->connection;
     }
-    public static function query($query, $data = [])
+    public static function query(string $query, array $data = []): \PDOStatement
     {
-        $pdo = self::getPDO();
-        $req = $pdo->prepare($query);
+        $pdo  = self::getPDO();
+        $stmt = $pdo->prepare($query);
+
         foreach ($data as $key => &$value)
         {
-            $req->bindParam("$key", $value);
+            $stmt->bindParam($key, $value);
         }
-        $req->execute();
-        return $req;
+
+        $stmt->execute();
+
+        return $stmt;
     }
-    public static function insertQuery($query, $data = [])
+    //  Exécute une requête d'insertion et retourne l'ID inséré, ou false en cas d'erreur.
+    public static function insertQuery(string $query, array $data = []): int|false
     {
         $pdo = self::getPDO();
+
         try
         {
-            $req = $pdo->prepare($query);
+            $stmt = $pdo->prepare($query);
             foreach ($data as $key => &$value)
             {
-                $req->bindParam("$key", $value);
+                $stmt->bindParam($key, $value);
             }
-            $req->execute();
-            return $pdo->lastInsertId();
+            $stmt->execute();
+            $id = intval($pdo->lastInsertId());
+            var_dump($id);
+            return $id;
         }
-        catch (PDOException $error)
+        catch (PDOException $e)
         {
-            echo "myError: " .  $error->getMessage();
+            throw new RuntimeException(
+                'Erreur lors de l\'insertion : ' . $e->getMessage(),
+                (int) $e->getCode(),
+                $e
+            );
             return false;
         }
     }
-    public static function countQuery($sql, $data = [])
+    //  * Retourne le résultat d'un COUNT.
+
+    public static function countQuery(string $sql, array $data = []): int
     {
-        $stm = self::query($sql, $data);
-        if ($stm)
-        {
-            $count = $stm->fetchColumn();
-        }
-        return $count;
+        $stmt = self::query($sql, $data);
+
+        return (int) $stmt->fetchColumn();
     }
-    public static function findBySql($query, $data = [], $outputArray = false)
+    //   Exécute une requête SELECT et retourne les résultats sous forme d'objets ou de tableaux associatifs.
+    public static function findBySql(string $query, array $data = [], bool $outputArray = false): array|false
     {
-        if (!$data)
-        {
-            $data = [];
-        }
-        $stm = self::query($query, $data);
-        if (!$stm)
-        {
-            return false;
-        }
-        if ($outputArray)
-        {
-            return $stm->fetchAll(PDO::FETCH_ASSOC);
-        }
-        else
-        {
-            return $stm->fetchAll(PDO::FETCH_OBJ);
-        }
+        $stmt = self::query($query, $data);
+
+        $fetchMode = $outputArray ? PDO::FETCH_ASSOC : PDO::FETCH_OBJ;
+
+        return $stmt->fetchAll($fetchMode) ?: false;
     }
-    static function findById($table = "client", $id = 15)
+
+
+    //   Trouve un enregistrement par son ID.
+    public static function findById(string $table, int $id): object|false
     {
-        $sql   = "SELECT * FROM `" . $table . "` WHERE `id`= :id LIMIT 1";
-        $res   = self::findBySql($sql, [":id" => $id]);
-        if (!$res)
-        {
-            return false;
-        }
-        return array_shift($res);
+        $sql    = "SELECT * FROM `$table` WHERE `id` = :id LIMIT 1";
+        $result = self::findBySql($sql, [':id' => $id]);
+
+        return $result ? array_shift($result) : false;
     }
-    static function findByAttribute($table = "client",  $attribute = "id", $val = 15)
+
+
+    //  * Trouve des enregistrements par la valeur d'un attribut.
+
+    public static function findByAttribute(string $table, string $attribute, mixed $value): array|false
     {
-        $sql   = "SELECT * FROM `" . $table . "` WHERE `$attribute`= :$attribute ";
-        $res   = self::findBySql($sql, [":" . $attribute => $val]);
-        if (!$res)
-        {
-            return false;
-        }
-        return $res;
+        $sql = "SELECT * FROM `$table` WHERE `$attribute` = :attribute";
+
+        return self::findBySql($sql, [':attribute' => $value]);
     }
 }

@@ -13,17 +13,15 @@ class UserController
 
     public function signin()
     {
-        $userSession = new Session();
-        $userId = $userSession->val();
-        if ($userId)
+        if (USER_ID)
         {
-            header("Location: " . ROOT);
+            header("Location: " . ROOT . "/map");
         }
         require_once("./views/users/signin.view.php");
     }
     public function login()
     {
-        show($_POST);
+
 
         if (isset($_POST['email']) && isset($_POST['password']))
         {
@@ -34,7 +32,7 @@ class UserController
             {
                 $userSession = new Session();
                 $userSession->val($userId);
-                header("Location: " . ROOT . "/user/signin");
+                header("Location: " . ROOT . "/map");
             }
             else
             {
@@ -57,6 +55,7 @@ class UserController
             $email = $_POST['email'];
             $res = User::createUser($firstname, $lastname, $email, $password, $password2);
         }
+        header("Location: " . ROOT . "/User");
     }
 
 

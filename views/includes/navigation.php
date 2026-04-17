@@ -2,6 +2,8 @@
 
 // echo $userId;
 
+use Models\User;
+
 if (USER_ID)
 {
     $user = new User(USER_ID);

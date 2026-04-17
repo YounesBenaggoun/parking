@@ -1,5 +1,7 @@
 <?php
 
+use Models\User;
+use Models\Parking;
 
 class ParkingController
 {

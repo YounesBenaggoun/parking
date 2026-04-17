@@ -1,6 +1,6 @@
 <?php
 
-
+declare(strict_types=1);
 
 namespace Models;
 
@@ -10,44 +10,57 @@ use Core\Database;
 
 class User extends PrincipalModel
 {
-    protected static $table = "user";
+    protected static string $table = 'user';
+
+    public string $firstname;
+    public string $lastname;
+    public string $email;
+    public string $password;
+
+
     public function __construct($id = 0)
     {
         parent::__construct($id);
     }
-    static function login($email, $password)
+
+    public static function login($email, $password)
     {
-        $sql = "SELECT id,lastname,firstname,email FROM " . static::$table . " WHERE email = :email AND password = :password";
+        $sql = "SELECT * FROM " . static::$table . " WHERE email = :email ";
         $data = [
-            "email" => trim($email),
-            "password" => md5(md5(trim($password)))
+            ":email" => trim($email)
         ];
         $res = Database::findBySql($sql, $data);
-        if (count($res))
+        if ($res &&  count($res))
         {
-            return $res[0]->id;
+            if (password_verify($password, $res[0]->password))
+            {
+                return $res[0]->id;
+            }
         }
         return false;
     }
-    
-    
 
-    static function createUser($firstname,  $lastname,  $email,  $password,  $password2)
+    public static function createUser($firstname,  $lastname,  $email,  $password,  $password2)
     {
         if (!$password || $password != $password2)
             return "PASSWORD DON'T MATCH OR EMPTY";
         $doubled = User::findByAttribute("email", $email);
 
         if ($doubled)
+        {
             return "EMAIL ALREADY EXIST";
+        }
         $user = new User();
         $user->firstname = trim($firstname);
         $user->lastname = trim($lastname);
         $user->email = trim($email);
-        $user->password = md5(md5(trim($password)));
-        $user->save();
-
-        header("Location: " . ROOT . "/user");
+        $user->password = password_hash(trim($password), PASSWORD_DEFAULT);
+        pri($user);
+        if ($user->save())
+        {
+            return true;
+        }
+        return false;
     }
     public function getParkings()
     {
@@ -79,5 +92,13 @@ class User extends PrincipalModel
             return true;
         }
         return false;
+    }
+    public function getReservation()
+    {
+        $sql = "SELECT * FROM reservation WHERE id_user = :id";
+        $record = Database::findBySql($sql, [
+            ":id" => $this->id
+        ]);
+        return $record;
     }
 }

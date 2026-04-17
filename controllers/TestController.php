@@ -1,14 +1,21 @@
 <?php
 
+use Core\Database;
+use Models\Reservation;
+use Models\User;
+use Models\Parking;
 
 class TestController
 {
     public function index()
     {
-        // $annonce = new Annonce(80);
-        // $annonce->titre = "Maroc";
-        // $annonce->save();
-        // show($annonce);
+
+        // $reservation = new Parking(1);
+        // var_dump($reservation);
+
+        Reservation::addReservation();
+
+
         echo "TestController";
     }
 }

@@ -1,29 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Core;
 
 #[\AllowDynamicProperties]
-class PrincipalModel
+abstract class PrincipalModel
 {
-    protected static $table;
-    public $id;
+    protected static string $table;
+    public int $id = 0;
 
-    public function __construct($id = 0)
+    public function __construct(int $id = 0)
     {
         $this->id = intval($id);
         $this->init();
     }
+
     private function prepareSql()
     {
         $data = [];
         foreach (self::attributes() as $attribute)
         {
             if (isset($this->$attribute))
-                $data[$attribute] =  trim($this->$attribute);
+            {
+                $record = is_string($this->$attribute) ? trim($this->$attribute) : $this->$attribute;
+                $data[$attribute] =  $record;
+            }
         }
         return $data;
     }
-    static function attributes()
+    static function attributes(): array
     {
         $req = "SHOW COLUMNS FROM  " . static::$table;
         $resultat = Database::findBySql($req);
@@ -35,7 +41,7 @@ class PrincipalModel
         }
         return $attributes;
     }
-    private function create()
+    private function create(): void
     {
         $data = $this->prepareSql();
         $columns = implode(",", array_keys($data));
@@ -47,7 +53,7 @@ class PrincipalModel
             $this->id = $id;
         }
     }
-    private function update()
+    private function update(): mixed
     {
         $data = $this->prepareSql();
         $setClause = '';
@@ -59,7 +65,7 @@ class PrincipalModel
         $query = "UPDATE " . static::$table . " SET $setClause  WHERE id = $this->id ";
         return Database::query($query, $data);
     }
-    public function save()
+    public function save(): mixed
     {
         if ($this->id)
             return $this->update();
@@ -80,20 +86,20 @@ class PrincipalModel
             $this->$key = $value;
         }
     }
-    public function remove()
+    public function remove(): mixed
     {
         if (!$this->id)
             return false;
         $req = "DELETE FROM " . static::$table . " WHERE  id =  :id ; ";
         return Database::query($req, [":id" => $this->id]);
     }
-    public static function findAll()
+    public static function findAll(): array|false
     {
         $req = "SELECT * FROM  " . static::$table . " ";
         $tab = Database::findBySql($req);
         return $tab;
     }
-    public static function findByAttribute($attribute, $val)
+    public static function findByAttribute($attribute, $val): array|false
     {
         return Database::findByAttribute(static::$table, $attribute, $val);
     }

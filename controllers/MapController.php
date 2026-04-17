@@ -1,5 +1,6 @@
 <?php
 
+use Core\Database;
 
 class MapController
 {
